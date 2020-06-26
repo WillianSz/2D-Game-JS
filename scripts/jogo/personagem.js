@@ -24,22 +24,35 @@ class Personagem extends Animacao {
 
     if (this.y > this.yInicial){
       this.y = this.yInicial
+      this.pulos = 0
     }
   }
 
   
   estaColidindo(inimigo) {
     noFill();
+    rect(
+      this.x +20,
+      this.y +30,
+      this.largura -50,
+      this.altura -30
+    )
+      rect(
+      inimigo.x +20,
+      inimigo.y +15,
+      inimigo.largura - 30,
+      inimigo.altura -30
+    )
     const precisao = .7
     const colisao = collideRectRect(
       this.x,
       this.y,
       this.largura * precisao,
       this.altura * precisao,
-      inimigo.x,
-      inimigo.y,
-      inimigo.largura * precisao,
-      inimigo.altura * precisao
+      inimigo.x +20,
+      inimigo.y +15,
+      inimigo.largura - 30,
+      inimigo.altura -30
     );
     return colisao;
   }
