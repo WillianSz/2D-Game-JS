@@ -4,6 +4,7 @@ let imagemInimigo;
 
 let cenario;
 let somDoJogo;
+let somDoPulo;
 let personagem;
 let inimigo;
 
@@ -70,12 +71,13 @@ function setup() {
   personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 110, 135, 220, 270);
   inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 52, 52, 104, 104);
   frameRate(40)
-  // somDoJogo.loop();
+//  somDoJogo.loop();
 }
 
 function keyPressed() {
   if (key === 'ArrowUp') {
     personagem.pula()
+    somDoPulo.play()
   }
 }
 
@@ -84,8 +86,14 @@ function draw() {
   cenario.move();
 
   personagem.exibe();
+  personagem.aplicaGravidade();
 
   inimigo.exibe();
   inimigo.move();
 
+  if (personagem.estaColidindo(inimigo)) {
+    console.log('colidiu')
+      noLoop();
+    }
+    
 }
